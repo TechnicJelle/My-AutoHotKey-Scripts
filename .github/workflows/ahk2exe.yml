@@ -19,6 +19,10 @@ jobs:
           in: ".\\MS Paint Hotkeys.ahk"
           out: ".\\msp hotkeys.exe"
           icon: ".\\.github\readme-images\\mspaint\\icon\\icon16.ico"
+      - name: Help me 2
+        run: |
+          pwd
+          ls
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
