@@ -7,7 +7,12 @@ You'll need [the AutoHotKey software](https://www.autohotkey.com/) to be able to
 - Pre-compiled\
 You won't need AutoHotKey for these, as they're just normal .exe files that you can run. These cannot be customised, but they do come with a fun icon!
 
-You might want to put these in your [Start-up folder](link to guide) if you want them to always be running.
+**How do I start these scripts automatically every time I start my PC?**\
+*This guide was adapted from [the official AHK FAQ](https://www.autohotkey.com/docs/FAQ.htm#Startup)*
+1. Press `Win`+`R` to open the Run dialog, then enter `shell:startup` and click OK or Enter. This will open the Startup folder for the current user.\
+To instead open the folder for all users, enter `shell:common startup` (however, in that case you must be an administrator to proceed).
+2. Put the .ahk file or the .exe file in this folder.
+
 
 ## MS Paint Hotkeys
 *Made in AutoHotkey Version 1.1.33.09*
