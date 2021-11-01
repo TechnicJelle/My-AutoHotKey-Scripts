@@ -29,13 +29,13 @@ jobs:
         run: scoop install autohotkey
 
       - name: Ahk2Exe
-        shell: powershell
         run: |
           pwd
           ls
-          Ahk2Exe.exe /in ".\\MS Paint Hotkeys.ahk" /out ".\\msp hotkeys.exe" /icon ".\\.github\\readme-images\\mspaint\\icon\\icon16.ico"
+          Ahk2Exe.exe /in "MS Paint Hotkeys.ahk" /out "msp hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico"
           pwd
           ls
+          
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
