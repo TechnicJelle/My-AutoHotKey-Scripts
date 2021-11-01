@@ -105,5 +105,5 @@ So in the end the Quick Access Toolbar should look exactly like this (Press `Alt
 ![](.github/readme-images/mspaint/qatoolbarfinal.png)
 
 **Download**
-- [AHK File]()
+- [AHK File](https://github.com/TechnicJelle/My-AutoHotKey-Scripts/blob/main/MS%20Paint%20Hotkeys.ahk)
 - [Pre-compiled]()
