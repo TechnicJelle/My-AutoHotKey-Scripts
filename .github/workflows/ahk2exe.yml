@@ -7,24 +7,38 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Help me
+      - name: Install Scoop
+        shell: powershell
         run: |
           pwd
           ls
+          iwr -useb get.scoop.sh | iex
+          scoop bucket add extras
+          pwd
+          ls
+          
+      - name: Add to environment variables
+        shell: powershell
+        run: Write-Output ('Path=' + $Env:SystemDrive + '\Windows\System32' + ';' + $Env:UserProfile + '\scoop\shims') >> $Env:GITHUB_ENV
+
+      - name: Install AutoHotkey
+        shell: powershell
+        run: scoop install autohotkey
+        
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Ahk2Exe
-        uses: nekocodeX/GitHub-Action-Ahk2Exe@main
-        with:
-          in: ".\\MS Paint Hotkeys.ahk"
-          out: ".\\msp hotkeys.exe"
-          icon: ".\\.github\readme-images\\mspaint\\icon\\icon16.ico"
-      - name: Help me 2
+        shell: powershell
         run: |
+          pwd
+          ls
+          Ahk2Exe.exe /in ".\\MS Paint Hotkeys.ahk" /out ".\\msp hotkeys.exe" /icon ".\\.github\\readme-images\\mspaint\\icon\\icon16.ico"
           pwd
           ls
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: build
-          path: ./*.exe
+          # A file, directory or wildcard pattern that describes what to upload
+          path: "*.exe"
