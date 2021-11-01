@@ -13,8 +13,10 @@ jobs:
         uses: nekocodeX/GitHub-Action-Ahk2Exe@main
         with:
           in: "MS Paint Hotkeys.ahk"
+          out: ".\\msp hotkeys.exe"
+          icon: ".\\.github\readme-images\\mspaint\\icon\\icon16.ico"
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: build
-          path: ./*
+          path: ./*.exe
