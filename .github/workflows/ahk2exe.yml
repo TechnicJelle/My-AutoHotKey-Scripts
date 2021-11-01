@@ -31,8 +31,10 @@ jobs:
       - name: Ahk2Exe
         shell: powershell
         run: |
+          where.exe "Ahk2Exe.exe"
           ahk2exe /in "MS Paint Hotkeys.ahk" /out "D:\a\My-AutoHotKey-Scripts\My-AutoHotKey-Scripts\msp hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico"
           ls
+          ls C:\Users\runneradmin\scoop\shims
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
