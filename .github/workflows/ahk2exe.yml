@@ -4,15 +4,19 @@ on: push
 
 jobs:
   Example:
-    name: Example
+    name: Build
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Help me
+        run: |
+          pwd
+          ls
       - name: Ahk2Exe
         uses: nekocodeX/GitHub-Action-Ahk2Exe@main
         with:
-          in: "MS Paint Hotkeys.ahk"
+          in: ".\\MS Paint Hotkeys.ahk"
           out: ".\\msp hotkeys.exe"
           icon: ".\\.github\readme-images\\mspaint\\icon\\icon16.ico"
       - name: Upload a Build Artifact
