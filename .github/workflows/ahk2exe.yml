@@ -32,6 +32,7 @@ jobs:
         shell: powershell
         run: |
           where.exe "Ahk2Exe.exe"
+          ls "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler"
           ahk2exe /in "./MS Paint Hotkeys.ahk" /out "./msp hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /silent verbose
           ls
           ls C:\Users\runneradmin\scoop\shims
