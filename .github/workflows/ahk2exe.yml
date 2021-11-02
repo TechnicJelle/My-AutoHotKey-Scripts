@@ -35,6 +35,7 @@ jobs:
           ls "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler"
           type "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler\readme.txt"
           ahk2exe /in "./MS_Paint_Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /bin "C:\Users\runneradmin\scoop\shims\Unicode 64-bit.bin" /silent verbose
+          $LASTEXITCODE
           ls
           ls C:\Users\runneradmin\scoop\shims
           
