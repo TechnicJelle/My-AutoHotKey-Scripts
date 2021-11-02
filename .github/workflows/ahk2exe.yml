@@ -34,7 +34,7 @@ jobs:
           where.exe "Ahk2Exe.exe"
           ls "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler"
           type "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler\readme.txt"
-          ahk2exe /in "./MS_Paint_Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /bin "C:\Users\runneradmin\scoop\shims\Unicode 64-bit.bin" /silent verbose
+          C:\Users\runneradmin\scoop\shims\ahk2exe.exe /in "./MS_Paint_Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /bin "C:\Users\runneradmin\scoop\shims\Unicode 64-bit.bin" /silent verbose
           $LASTEXITCODE
           Start-Sleep -s 15
           ls
