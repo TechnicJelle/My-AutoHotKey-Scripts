@@ -18,6 +18,9 @@ To instead open the folder for all users, enter `shell:common startup` (however,
 *Made in AutoHotkey Version 1.1.33.09*
 
 This script adds keyboard shortcuts to MS Paint.\
+I very much like using hotkeys to speed up my workflows and it annoyed me Paint had so little useful hotkeys, so I took it into my own hands to add them.\
+Of course I could use other, better programs instead of Paint, but due to its simplicity and speed with which I can get those simple things done I use it quite often.
+
 These keyboard shortcuts were vaguely inspired by [Krita](https://krita.org/) and [Blender](https://blender.org/).
 
 ### Custom
