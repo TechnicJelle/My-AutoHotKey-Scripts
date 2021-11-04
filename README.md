@@ -49,6 +49,7 @@ Category | Icon | Function | Keybind
 &nbsp; | ![](.github/readme-images/mspaint/zoom-100.png)| Zoom 100% | `Ctrl` + `0`
 **Misc** | ![](.github/readme-images/mspaint/misc-redo.png)| Redo | `Ctrl` + `Shift` + `Z`
 &nbsp; | ![](.github/readme-images/mspaint/misc-mirror.png)| Mirror | `M`
+&nbsp; | ![](.github/readme-images/mspaint/misc-quit.png)| Quit | `Ctrl` + `Q`
 
 (I drew all of these icons myself in Krita to look similar to the ones in MS Paint, but not the same, due to the licensing.)
 

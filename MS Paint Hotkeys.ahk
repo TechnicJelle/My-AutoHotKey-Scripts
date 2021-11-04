@@ -245,3 +245,13 @@ m:: ;mirror
 		Send m
 	}
 return
+
+^q up:: ;quit
+	if(hotkeysEnabled) {
+		keywait, Ctrl ;wait until control is released
+		Send !{F4}
+		reload
+	} else {
+		Send {Ctrl}q
+	}
+return
