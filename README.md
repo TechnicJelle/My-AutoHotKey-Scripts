@@ -112,4 +112,4 @@ So in the end the Quick Access Toolbar should look exactly like this (Press `Alt
 
 **Download**
 - [AHK File](https://raw.githubusercontent.com/TechnicJelle/My-AutoHotKey-Scripts/main/MS%20Paint%20Hotkeys.ahk)
-- [Pre-compiled](https://github.com/TechnicJelle/My-AutoHotKey-Scripts/releases/download/v1.0.0/MS_Paint_Hotkeys.exe)
+- [Pre-compiled](https://github.com/TechnicJelle/My-AutoHotKey-Scripts/releases/latest/download/MS_Paint_Hotkeys.exe)
