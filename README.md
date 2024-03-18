@@ -4,7 +4,7 @@ This is a collection of all of my AHK Scripts
 For all of these you have two download options:
 - The .ahk file itself which you can modify yourself to your own preferences.\
 You'll need [the AutoHotKey software](https://www.autohotkey.com/) to be able to use these.
-- Pre-compiled\
+- Pre-compiled (with [Ahk2Exe](https://github.com/AutoHotkey/Ahk2Exe))\
 You won't need AutoHotKey for these, as they're just normal .exe files that you can run. These cannot be customised, but they do come with a fun icon!
 
 **How do I start these scripts automatically every time I start my PC?**\
