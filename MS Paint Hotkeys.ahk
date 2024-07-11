@@ -9,6 +9,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
+MSPaintIconsPath := "C:\Windows\SystemResources\mspaint.exe.mun" 
+Menu, Tray, Icon, %MSPaintIconsPath%, -2 ; Sets a nice Paint icon for script in tray
 
 ; Made in AutoHotkey Version 1.1.33.09 
 ; by TechnicJelle (https://github.com/TechnicJelle/My-AutoHotKey-Scripts)
