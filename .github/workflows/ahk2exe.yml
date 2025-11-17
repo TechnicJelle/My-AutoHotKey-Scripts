@@ -15,7 +15,7 @@ jobs:
         run: |
           Invoke-WebRequest https://github.com/AutoHotkey/Ahk2Exe/releases/download/Ahk2Exe1.1.37.02a0a/Ahk2Exe1.1.37.02a0.zip -OutFile Ahk2Exe.zip
           7z x Ahk2Exe.zip
-          tree
+          tree /f
 
       - name: Ahk2Exe
         shell: powershell
