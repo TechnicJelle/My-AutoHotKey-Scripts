@@ -3,46 +3,26 @@ name: Ahk2Exe
 on: push
 
 jobs:
-  Example:
+  build:
     name: Build
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-        
-      - name: Install Scoop
+      
+      - name: Download Ahk2Exe Compiler
         shell: powershell
         run: |
-          pwd
-          ls
-          iwr -useb get.scoop.sh | iex
-          scoop bucket add extras
-          pwd
-          ls
-          
-      - name: Add to environment variables
-        shell: powershell
-        run: Write-Output ('Path=' + $Env:SystemDrive + '\Windows\System32' + ';' + $Env:UserProfile + '\scoop\shims') >> $Env:GITHUB_ENV
-
-      - name: Install AutoHotkey
-        shell: powershell
-        run: scoop install autohotkey
+          Invoke-WebRequest https://github.com/AutoHotkey/Ahk2Exe/releases/download/Ahk2Exe1.1.37.02a0a/Ahk2Exe1.1.37.02a0.zip -OutFile Ahk2Exe.zip
+          7z x Ahk2Exe.zip
 
       - name: Ahk2Exe
         shell: powershell
         run: |
-          where.exe "Ahk2Exe.exe"
-          ls "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler"
-          type "C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler\readme.txt"
-          C:\Users\runneradmin\scoop\apps\autohotkey\current\Compiler\ahk2exe.exe /in "./MS_Paint_Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /bin "C:\Users\runneradmin\scoop\shims\Unicode 64-bit.bin" /silent verbose
-          $LASTEXITCODE
-          Start-Sleep -s 15
-          ls
-          ls C:\Users\runneradmin\scoop\shims
+          Ahk2Exe.exe /in "./MS_Paint_Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /bin "C:\Users\runneradmin\scoop\shims\Unicode 64-bit.bin" /silent verbose
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v5
         with:
           name: build
-          # A file, directory or wildcard pattern that describes what to upload
           path: "*.exe"
