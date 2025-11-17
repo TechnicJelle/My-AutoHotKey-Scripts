@@ -1,257 +1,111 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
+; <^>!\t\tAltGr
+; #\t\tWin
+; !\t\tAlt
+; ^\t\tCtrl
+; +\t\tShift
+
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
+MSPaintIconsPath := "C:\Windows\SystemResources\mspaint.exe.mun"
+Menu, Tray, Icon, %MSPaintIconsPath%, -2 ; Sets a nice Paint icon for script in tray
 
-; Made in AutoHotkey Version 1.1.33.09 
-;  by TechnicJelle (https://github.com/TechnicJelle/My-AutoHotKey-Scripts)
+; Made in AutoHotkey Version 1.1.33.09
+; by TechnicJelle (https://github.com/TechnicJelle/My-AutoHotKey-Scripts)
+; Glauco: Edited for German keyboard: z hotkeys now y
 
-#IfWinActive, ahk_class MSPaintApp
+#IfWinActive ahk_class MSPaintApp
 
-hotkeysEnabled := True
+Handler(sendKey, defaultKey) {
+    if (sendKey != "")
+        Send %sendKey%
+    else
+        Send %defaultKey%
+}
 
-p:: ;pencil
-	if(hotkeysEnabled) {
-		Send {Alt}1
-		reload
-	} else {
-		Send p
-	}
+; Hotkey definitions
+p::    Handler("{Alt}1", "p")           ; pencil
+f::    Handler("{Alt}2", "f")           ; fill bucket
+e::    Handler("{Alt}4", "e")           ; eraser
+c::    Handler("{Alt}5", "c")           ; color picker
+r::    Handler("{Alt}6", "r")           ; rect select
+b::    Handler("{Alt}09{Enter}", "b")    ; brush
+1::    Handler("{Alt}08{Enter}", "1")    ; thickness 1
+2::    Handler("{Alt}08{Down 1}{Enter}", "2")    ; thickness 2
+3::    Handler("{Alt}08{Down 2}{Enter}", "3")    ; thickness 3
+4::    Handler("{Alt}08{Down 3}{Enter}", "4")    ; thickness 4
+y::    Handler("{Alt}07{Enter}", "z")     ; color 1
+x::    Handler("{Alt}06{Enter}", "x")     ; color 2
+l::    Handler("{Alt}HSH{Enter}", "l")     ; line tool
+o::    Handler("{Alt}HSH{Tab 2}{Enter}", "o") ; oval
+g::    Handler("{Alt}VG{Enter}{Alt}H{Esc 2}", "g") ; gridlines
+m::    Handler("{Alt}HROH", "m")         ; mirror
+^+r up::Handler("{Alt}7", "^+r")       ; free select
+^+t up::Handler("{Alt}8", "^+t")       ; transparent select
+^i up:: Handler("{Alt}9", "^i")        ; invert selection
+^r up:: Handler("{Alt}VR{Enter}{Alt}H{Esc 2}", "^r") ; rulers
+^= up:: Handler("{Alt}VI{Enter}{Alt}H{Esc 2}", "^=") ; zoom in
+^- up:: Handler("{Alt}VO{Enter}{Alt}H{Esc 2}", "^-") ; zoom out
+^0 up:: Handler("{Alt}VM{Enter}{Alt}H{Esc 2}", "^0") ; zoom 100%
+^+y up::Handler("^y", "^+z")            ; redo
+^w up:: Handler("!{F4}", "^w")         ; exit without save
+
+; Text tool toggle: pause hotkeys during text editing
+$t::
+    Send {Alt}3               ; activate text tool
+    Suspend, On                 ; disable other hotkeys
+    KeyWait, LButton, D
+    KeyWait, LButton, U
+    KeyWait, LButton, D
+    KeyWait, LButton, U
+    Suspend, Off                ; re-enable hotkeys
+    Send {Alt}6               ; deactivate text tool
 return
 
-f:: ;fill bucket
-	if(hotkeysEnabled) {
-		Send {Alt}2
-		reload
-	} else {
-		Send f
-	}
+^q up:: ; quick quit: copy all, then close without save
+    Send ^a
+    Send ^c
+    Send !{F4}{Tab}{Enter}
 return
 
-^t:: ;text
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send {Alt}3
-		KeyWait, LButton, D
-		KeyWait, LButton, U
-		hotkeysEnabled := False
-		; waits until text editing is done
-		KeyWait, LButton, D
-		KeyWait, LButton, U
-		hotkeysEnabled := True
-		Send {Alt}6
-	} else {
-		Send {Ctrl}t
-	}
+; Cheatsheet: hold F1 to view available hotkeys
+$*F1::
+Gui, CheatGui:New, +AlwaysOnTop +ToolWindow -Caption
+CheatText =
+(
+Available Hotkeys:
+p: Pencil
+f: Fill Bucket
+e: Eraser
+c: Color Picker
+r: Rect Select
+b: Brush
+14: Line Thickness 14
+y: Color 1
+x: Color 2
+l: Line Tool
+o: Oval Tool
+g: Gridlines
+m: Mirror
+Ctrl+Shift+r: Free Select
+Ctrl+Shift+t: Transparent Select
+Ctrl+i: Invert Selection
+Ctrl+r: Rulers
+Ctrl+=: Zoom In
+Ctrl+-: Zoom Out
+Ctrl+0: Zoom 100
+Ctrl+Shift+y: Redo
+Ctrl+w: Exit without save
+t: Textbox
+)
+Gui, CheatGui:Add, Text,, %CheatText%
+Gui, CheatGui:Show, AutoSize Center, Hotkey Cheatsheet
 return
 
-e:: ;eraser
-	if(hotkeysEnabled) {
-		Send {Alt}4
-		reload
-	} else {
-		Send e
-	}
+$*F1 up::
+    Gui, CheatGui:Destroy
 return
 
-c:: ;colour picker
-	if(hotkeysEnabled) {
-		Send {Alt}5
-		reload
-	} else {
-		Send c
-	}
-return
-
-^r up:: ;rect select
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send {Alt}6
-		reload
-	} else {
-		Send {Ctrl}r
-	}
-return
-
-^+r up:: ;free select
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		keywait, Shift ;wait until shift is released
-		Send {Alt}7
-		reload
-	} else {
-		Send {Ctrl}{Shift}r
-	}
-return
-
-^+t up:: ;transparent selection
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		keywait, Shift ;wait until shift is released
-		Send {Alt}8
-		reload
-	} else {
-		Send {Ctrl}{Shift}t
-	}
-return
-
-^i up:: ;invert selection
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send {Alt}9
-		reload
-	} else {
-		Send {Ctrl}i
-	}
-return
-
-b:: ;brush
-	if(hotkeysEnabled) {
-		Send {Alt}09{Enter}
-		reload
-	} else {
-		Send b
-	}
-return
-
-1:: ;line thickness 1
-	if(hotkeysEnabled) {
-		Send {Alt}08{Enter}
-		reload
-	} else {
-		Send 1
-	}
-return
-
-2:: ;line thickness 2
-	if(hotkeysEnabled) {
-		Send {Alt}08{Down 1}{Enter}
-		reload
-	} else {
-		Send 2
-	}
-return
-
-3:: ;line thickness 3
-	if(hotkeysEnabled) {
-		Send {Alt}08{Down 2}{Enter}
-		reload
-	} else {
-		Send 3
-	}
-return
-
-4:: ;line thickness 4
-	if(hotkeysEnabled) {
-		Send {Alt}08{Down 3}{Enter}
-		reload
-	} else {
-		Send 4
-	}
-return
-
-z:: ;colour 1
-	if(hotkeysEnabled) {
-		Send {Alt}07{Enter}
-		reload
-	} else {
-		Send z
-	}
-return
-
-x:: ;colour 2
-	if(hotkeysEnabled) {
-		Send {Alt}06{Enter}
-		reload
-	} else {
-		Send x
-	}
-return
-
-l:: ;line tool
-	if(hotkeysEnabled) {
-		Send {Alt}HSH{Enter}
-		reload
-	} else {
-		Send l
-	}
-return
-
-r:: ;rulers
-	if(hotkeysEnabled) {
-		Send {Alt}VR{Enter}{Alt}H{Esc 2}
-		reload
-	} else {
-		Send r
-	}
-return
-
-g:: ;gridlines
-	if(hotkeysEnabled) {
-		Send {Alt}VG{Enter}{Alt}H{Esc 2}
-		reload
-	} else {
-		Send g
-	}
-return
-
-^= up:: ;zoom in
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send {Alt}VI{Enter}{Alt}H{Esc 2}
-		reload
-	} else {
-		Send {Ctrl}=
-	}
-return
-
-^- up:: ;zoom out
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send {Alt}VO{Enter}{Alt}H{Esc 2}
-		reload
-	} else {
-		Send {Ctrl}-
-	}
-return
-
-^0 up:: ;zoom 100%
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send {Alt}VM{Enter}{Alt}H{Esc 2}
-		reload
-	} else {
-		Send {Ctrl}0
-	}
-return
-
-^+z up:: ;redo
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		keywait, Shift ;wait until shift is released
-		Send ^y
-		reload
-	} else {
-		Send {Ctrl}{Shift}z
-	}
-return
-
-m:: ;mirror
-	if(hotkeysEnabled) {
-		Send {Alt}HROH
-		reload
-	} else {
-		Send m
-	}
-return
-
-^q up:: ;quit
-	if(hotkeysEnabled) {
-		keywait, Ctrl ;wait until control is released
-		Send !{F4}
-		reload
-	} else {
-		Send {Ctrl}q
-	}
-return
+#If  ; Reset context-sensitivity
