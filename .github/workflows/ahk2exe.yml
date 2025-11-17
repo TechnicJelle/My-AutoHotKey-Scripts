@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
         
       - name: Install Scoop
         shell: powershell
@@ -41,7 +41,7 @@ jobs:
           ls C:\Users\runneradmin\scoop\shims
           
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v5
         with:
           name: build
           # A file, directory or wildcard pattern that describes what to upload
