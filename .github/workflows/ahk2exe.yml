@@ -9,7 +9,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      
+
+      - name: Download AutoHotKey
+        shell: powershell
+        run: |
+          Invoke-WebRequest https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.19/AutoHotkey_2.0.19.zip -OutFile AutoHotkey.zip
+          7z x AutoHotkey.zip
+
       - name: Download Ahk2Exe Compiler
         shell: powershell
         run: |
@@ -19,7 +25,7 @@ jobs:
       - name: Ahk2Exe
         shell: powershell
         run: |
-          ./Ahk2Exe.exe /in "./MS Paint Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /silent verbose
+          ./Ahk2Exe.exe /in "./MS Paint Hotkeys.ahk" /out "./msp_hotkeys.exe" /icon ".github\readme-images\mspaint\icon\icon16.ico" /base "./AutoHotkey64.exe" /silent verbose
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v5
